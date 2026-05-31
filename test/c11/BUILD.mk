@@ -32,6 +32,8 @@ TEST_C11_DIRECTDEPS =						\
 	LIBC_NEXGEN32E						\
 	LIBC_RUNTIME						\
 	LIBC_THREAD						\
+	LIBC_TINYMATH						\
+	THIRD_PARTY_COMPILER_RT					\
 
 TEST_C11_DEPS :=						\
 	$(call uniq,$(foreach x,$(TEST_C11_DIRECTDEPS),$($(x))))
@@ -47,6 +49,8 @@ o/$(MODE)/test/c11/%.dbg:					\
 		$(CRT)						\
 		$(APE_NO_MODIFY_SELF)
 	@$(APELINK)
+
+o/$(MODE)/test/c11/%.o: CFLAGS += -fno-builtin
 
 .PHONY: o/$(MODE)/test/c11
 o/$(MODE)/test/c11:						\
